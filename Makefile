@@ -6,7 +6,7 @@
 #    By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 09:43:49 by dmahoro-          #+#    #+#              #
-#    Updated: 2021/04/02 23:21:17 by dmahoro-         ###   ########.fr        #
+#    Updated: 2021/04/13 01:32:43 by dmahoro-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRCS	= ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 		  ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 		  \
 		  \
-		  ft_strstr.c ft_strcmp.c \
+		  ft_strstr.c ft_strcmp.c ft_memchr_pos.c \
 
 CFLAGS	= -Wall -Wextra -Werror
 OBJS	= $(SRCS:%.c=%.o)

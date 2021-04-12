@@ -70,5 +70,6 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 char		*ft_strstr(const char *s1, const char *s2);
 int			ft_strcmp(const char *s1, const char *s2);
+int			ft_memchr_pos(const void *str, int c, size_t n);
 
 #endif
