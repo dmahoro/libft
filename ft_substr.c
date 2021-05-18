@@ -15,14 +15,22 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*ret;
+	char	*ite;
+	size_t	i;
 
-	if (s == NULL || start > ft_strlen(s))
+	if (s == NULL)
 		return (NULL);
 	ret = (char *)malloc((len + 1) * sizeof(char));
 	if (!ret)
 		return (NULL);
-	s += start;
-	ft_strncpy(ret, s, len);
-	ret[len] = '\0';
+	ite = ret;
+	if (start < len)
+	{
+		i = 0;
+		s += start;
+		while (s[i] && i < len)
+			*ite++ = s[i++];
+	}
+	*ite = '\0';
 	return (ret);
 }

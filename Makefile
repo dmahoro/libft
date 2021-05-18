@@ -79,22 +79,26 @@ CFLAGS		= -Wall -Wextra -Werror
 OBJS		= $(SRCS:%.c=%.o)
 OBJS_BON	= $(OBJS) $(SRCS_BON:%.c=%.o)
 
-$(NAME) : $(OBJS)
+$(NAME): $(OBJS)
 		$(CC) $(CFLAGS) -c $(SRCS) -I./
 		ar -rcs $@ $^
 
-bonus : $(OBJS_BON)
+bonus: $(OBJS_BON)
 		$(CC) $(CFLAGS) -c $(SRCS_BON) -I./
 		ar -rcs $(NAME) $^
 
 all: $(NAME)
 
+so:
+	$(CC) -c -fPIC $(CFLAGS) $(SRCS_BON)
+	gcc -shared -o libft.so $(OBJS_BON)
+
 clean:
-	rm -f $(OBJS_BON)
+	rm -f $(OBJS_BON) *.so
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

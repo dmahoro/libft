@@ -12,13 +12,58 @@
 
 #include "libft.h"
 
+# define FT_ULONG_MAX ((unsigned long)(~0L))
+# define FT_LONG_MAX ((long)(FT_ULONG_MAX >> 1))
+# define FT_LONG_MIN ((long)(~FT_LONG_MAX))
+
+static long	handle_limit(long res, int overflow, int sign)
+{
+	if (overflow)
+	{
+		if (sign < 0)
+			return (FT_LONG_MIN);
+		else
+			return (FT_LONG_MAX);
+	}
+	if (sign < 0)
+		return (-res);
+	return (res);
+}
+
+static long	ft_strtol(const char * str, int sign)
+{
+	unsigned long	val;
+	int		digit;
+	int		overflow;
+	unsigned long	cutoff;
+	int		cutlim;
+
+	val = 0;
+	if (sign < 0)
+		cutoff = -(unsigned long)FT_LONG_MIN;
+	else
+		cutoff = (unsigned )FT_LONG_MAX;
+	cutlim = cutoff % 10;
+	cutoff /= 10;
+	overflow = 0;
+	while (*str && *str >= '0' && *str <= '9')
+	{
+		digit = *str - '0';
+		if (overflow || val > cutoff
+			|| (val == cutoff && digit > cutlim))
+			overflow = 1;
+		else
+			val = val * 10 + digit;
+		str++;
+	}
+	return ((int)handle_limit(val, overflow, sign));
+}
+
 int	ft_atoi(const char *str)
 {
-	int			sign;
-	long int	val;
+	int	sign;
 
 	sign = 1;
-	val = 0;
 	while (*str == ' ' || *str == '\f' || *str == '\n' || *str == '\r'
 		|| *str == '\t' || *str == '\v')
 		str++;
@@ -28,10 +73,5 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		str++;
 	}
-	while (ft_isdigit(*str))
-	{
-		val = val * 10 + (*str - '0');
-		str++;
-	}
-	return (val * sign);
+	return ((int)ft_strtol(str, sign));
 }
