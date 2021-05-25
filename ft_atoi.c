@@ -6,15 +6,18 @@
 /*   By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 21:56:06 by dmahoro-          #+#    #+#             */
-/*   Updated: 2021/03/25 21:58:25 by dmahoro-         ###   ########.fr       */
+/*   Updated: 2021/05/25 09:59:47 by dmahoro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-# define FT_ULONG_MAX ((unsigned long)(~0L))
-# define FT_LONG_MAX ((long)(FT_ULONG_MAX >> 1))
-# define FT_LONG_MIN ((long)(~FT_LONG_MAX))
+//# define	FT_ULONG_MAX	((unsigned long)(~0L))
+# define	FT_ULONG_MAX	0xFFFFFFFF
+//# define	FT_LONG_MAX		((long)(FT_ULONG_MAX >> 1))
+# define	FT_LONG_MAX		0x7FFFFFFF
+//# define	FT_LONG_MIN		((long)(~FT_LONG_MAX))
+# define	FT_LONG_MIN		0x80000000
 
 static long	handle_limit(long res, int overflow, int sign)
 {
@@ -30,13 +33,13 @@ static long	handle_limit(long res, int overflow, int sign)
 	return (res);
 }
 
-static long	ft_strtol(const char * str, int sign)
+static long	ft_strtol(const char *str, int sign)
 {
 	unsigned long	val;
-	int		digit;
-	int		overflow;
+	int				digit;
+	int				overflow;
 	unsigned long	cutoff;
-	int		cutlim;
+	int				cutlim;
 
 	val = 0;
 	if (sign < 0)
