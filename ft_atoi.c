@@ -12,12 +12,9 @@
 
 #include "libft.h"
 
-//# define	FT_ULONG_MAX	((unsigned long)(~0L))
-#define FT_ULONG_MAX ((unsigned long)~0L)
-//# define	FT_LONG_MAX		((long)(FT_ULONG_MAX >> 1))
-#define FT_LONG_MAX ((long)(((unsigned long)~0L) >> 1))
-//# define	FT_LONG_MIN		((long)(~FT_LONG_MAX))
-#define FT_LONG_MIN ((long)~(((unsigned long)~0L) >> 1))
+#define	FT_ULONG_MAX ((unsigned long)(~0L))
+#define FT_LONG_MAX 0x7FFFFFFFFFFFFFFF
+#define FT_LONG_MIN 0x8000000000000000
 
 static long	handle_limit(long res, int overflow, int sign)
 {
